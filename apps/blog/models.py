@@ -10,7 +10,7 @@ class Category(models.Model):
     """
     文章分类
     """
-    name = models.CharField(max_length=20, verbose_name='类别')
+    name = models.CharField(choices=(('skill', '技术文'), ('talk', '杂谈')),max_length=20, verbose_name='类别')
 
     class Meta:
         verbose_name = '类别'

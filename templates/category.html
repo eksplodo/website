@@ -6,7 +6,7 @@
   <div class="content-wrap">
     <div class="content">
       <div class="title">
-        <h3>{{ category.name }}</h3>
+        <h3>{{ category }}</h3>
       </div>
         {% for article in article_list %}
       <article class="excerpt excerpt-1">
@@ -14,12 +14,12 @@
               <img class="thumb" data-original="{{ MEDIA_URL }}{{ article.image }}" src="{{ MEDIA_URL }}{{ article.image }}" alt="">
           </a>
         <header>
-            <a class="cat" href="{% url 'blog:category' category.id %}">{{ category.name }}<i></i></a>
+            <a class="cat" href="{% url 'blog:category' article.category %}">{{ category.name }}<i></i></a>
           <h2><a href="{{ article.title }}" title="">{{ article.title }}</a></h2>
         </header>
         <p class="meta">
           <time class="time"><i class="glyphicon glyphicon-time"></i> {{ article.create_time }}</time>
-          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共{{ article.views }}人围观</span> <a class="comment" href="article.html#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
+          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共{{ article.views }}人围观</span> <i class="glyphicon glyphicon-comment"></i> {{ article.comment_set.count }}个不明物体</p>
         <p class="note">{{ article.desc }}</p>
       </article>
         {% endfor %}

@@ -9,6 +9,6 @@ app_name = 'blog'
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('article/<int:art_id>/', DetailView.as_view(), name='article'),
-    path('category/<int:cat_id>/', CategoryView.as_view(), name='category'),
+    path('category/<str:cat>/', CategoryView.as_view(), name='category'),
     path('rss', ArticleFeed(), name='rss'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

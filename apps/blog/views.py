@@ -10,13 +10,25 @@ from comments.models import Comment
 
 class IndexView(View):
     def get(self, request):
+        current_page = 'home'
         article_list = Article.objects.all().order_by('-create_time')
         hot_articles = Article.objects.all().order_by('-views')[:5]
         tag_list = Tag.objects.all()[:5]
+
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(article_list, 3, request=request)
+
+        article_list = p.page(page)
+
         return render(request, 'index.html', {
             'article_list': article_list,
             'tag_list': tag_list,
             'hot_articles': hot_articles,
+            'current_page': current_page
         })
 
 
@@ -42,7 +54,7 @@ class DetailView(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(comments, 5, request=request)
+        p = Paginator(comments, 3, request=request)
 
         comments = p.page(page)
 
@@ -56,12 +68,28 @@ class DetailView(View):
 
 
 class CategoryView(View):
-    def get(self, request, cat_id):
-        category = Category.objects.get(id=cat_id)
-        article_list = category.article_set.all()
+    def get(self, request, cat):
         hot_articles = Article.objects.all().order_by('-views')[:5]
-        return render(request, 'category.html', {
-            'article_list': article_list,
-            'hot_articles': hot_articles,
-            'category': category,
-        })
+        if cat == 'skill':
+            current_page = 'skill'
+            article_list = Article.objects.filter(category__name=cat)
+            return render(request, 'category.html', {
+                'article_list': article_list,
+                'hot_articles': hot_articles,
+                'category': '授人以渔',
+                'current_page': current_page,
+            })
+        elif cat == 'talk':
+            current_page = 'talk'
+            article_list = Article.objects.filter(category__name=cat)
+            return render(request, 'category.html', {
+                'article_list': article_list,
+                'hot_articles': hot_articles,
+                'category': '生活随笔',
+                'current_page': current_page,
+            })
+
+
+"""
+Article.objects.filter(category=category)
+"""

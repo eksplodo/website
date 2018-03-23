@@ -9,8 +9,8 @@
         <h1 class="article-title"><a href="article.html">{{ article.title }}</a></h1>
         <div class="article-meta">
             <span class="item article-meta-time"><time class="time" data-toggle="tooltip" data-placement="bottom" title="时间：{{ article.create_time }}"><i class="glyphicon glyphicon-time"></i> {{ article.create_time }}</time></span>
-            <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title="来源：{{ article.category }}"><i class="glyphicon glyphicon-globe"></i> {{ article.category }}</span>
-            <span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title="栏目：{{ article.category }}"><i class="glyphicon glyphicon-list"></i> <a href="{{ article.category }}" title="">{{ article.category }}</a></span>
+            <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title="来源：{{ article.category.get_name_display }}"><i class="glyphicon glyphicon-globe"></i> {{ article.category.get_name_display }}</span>
+            <span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title="栏目：{{ article.category.get_name_display }}"><i class="glyphicon glyphicon-list"></i> <a href="{% url 'blog:category' article.category %}" title="">{{ article.category.get_name_display }}</a></span>
             <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title="查看：{{ article.views }}"><i class="glyphicon glyphicon-eye-open"></i> 共{{ article.views }}人围观</span>
             <span class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title="评论：0"><i class="glyphicon glyphicon-comment"></i> {{ comments_nums }}个不明物体</span>
         </div>
@@ -81,7 +81,6 @@
             {% if comments.has_previous %}
             <a href="?{{ comments.previous_page_number.querystring }}" class="prev">&lsaquo;&lsaquo; 上一页</a>
             {% else %}
-{#            <span class="disabled prev">上一页</span>#}
             {% endif %}
         {% for page in comments.pages %}
         {% if page %}
@@ -94,19 +93,11 @@
         ...
         {% endif %}
         {% endfor %}
-        {% if page_obj.has_next %}
+        {% if comments.has_next %}
         <a href="?{{ comments.next_page_number.querystring }}" class="next">下一页 &rsaquo;&rsaquo;</a>
         {% else %}
-{#        <span class="disabled next">下一页</span>#}
         {% endif %}
         </div>
-{#        <div class="quotes">#}
-{#            <span class="disabled">首页</span>#}
-{#            <span class="disabled">上一页</span>#}
-{#            <a class="current">1</a><a href="">2</a>#}
-{#            <span class="disabled">下一页</span>#}
-{#            <span class="disabled">尾页</span>#}
-{#        </div>#}
       </div>
     </div>
   </div>
