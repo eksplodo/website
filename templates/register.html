@@ -1,0 +1,66 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>注册</title>
+<link href="{% static 'css/style1.css' %}" rel='stylesheet' type='text/css' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Consent Sign Up Form,Login Forms,Sign up Forms,Registration Forms,News latter Forms,Elements"./>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--webfonts -->
+	<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,100italic,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
+<!--//webfonts-->
+</head>
+<body>
+
+<!--/start-login-one-->	
+		<h1>注册</h1>
+		<div class="login">
+			<form id="register_form" action="{% url 'users:register' %}" method="post" autocomplete="off">
+				<ul>
+					<li>
+{#						<a href="#" class=" icon user"></a>#}
+                        <label class=" icon user"></label>
+                        <input type='hidden' name='csrfmiddlewaretoken' value='gTZljXgnpvxn0fKZ1XkWrM1PrCGSjiCZ' />
+                        <input type="text" class="text" name="username" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'username';}" >
+					</li>
+					<li>
+{#						<a href="#" class=" icon mail"></a>#}
+                        <label class=" icon mail"></label>
+                        <input type="text" class="text" name="email" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'email';}" >
+					</li>
+					<div class="dumy">
+					<li class="psw">
+{#						<a href="#" class=" icon key"></a>#}
+                        <label class=" icon key"></label>
+                        <input type="password" name="password1" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+					</li>
+					<li class="psw two">
+{#						<a href="#" class=" icon key"></a>#}
+                        <label class=" icon key"></label>
+                        <input type="password" name="password2" value="Confirm Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Confirm Password';}">
+					</li>
+                        <div class="error btns" id="jsEmailTips">{{ msg }}</div>
+					<div class="clear"></div>
+				</div>
+
+					<div class="submit">
+							<input class="btn btn-green" type="submit" onclick="myFunction()" value="注册" >
+                        <input type='hidden' name='csrfmiddlewaretoken' value='5I2SlleZJOMUX9QbwYLUIAOshdrdpRcy' />
+							<div class="strip">Or</div>
+			       </div>
+
+			      	<div class="dropbox"> <a class="drop" href="#">返回首页</a></div>
+				</ul>
+                {% csrf_token %}
+			</form>
+			
+		</div>
+<!--start-cpyright-->
+   		<div class="copy-right">
+				<p>Copyright &copy; 2333  All rights  Reserved | Power by &nbsp;<a href="">Django</a></p>
+		</div>
+	<!--//end-copyright-->
+</body>
+</html>
